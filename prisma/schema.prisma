@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model aluno {
+  id          Int           @id @default(autoincrement())
+  nome        String        @db.VarChar(100)
+  email       String        @db.VarChar(100)
+  senha       String        @db.VarChar(100)
+  turma_aluno turma_aluno[]
+}
+
+model disciplina {
+  id           Int       @id @default(autoincrement())
+  nome         String    @db.VarChar(30)
+  professor_id Int
+  professor    professor @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "disciplina_ibfk_1")
+
+  @@index([professor_id], map: "professor_id")
+}
+
+model horarios {
+  id           Int       @id @default(autoincrement())
+  inicio_aulas DateTime  @db.Date
+  fim_aulas    DateTime  @db.Date
+  professor_id Int
+  professor    professor @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "horarios_ibfk_1")
+
+  @@index([professor_id], map: "professor_id")
+}
+
+model professor {
+  id         Int          @id @default(autoincrement())
+  nome       String       @db.VarChar(100)
+  email      String       @db.VarChar(100)
+  senha      String       @db.VarChar(100)
+  disciplina disciplina[]
+  horarios   horarios[]
+  turma      turma[]
+}
+
+model turma {
+  id            Int           @id @default(autoincrement())
+  nome          String        @db.VarChar(30)
+  limite_alunos Int
+  professor_id  Int
+  professor     professor     @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_ibfk_1")
+  turma_aluno   turma_aluno[]
+
+  @@index([professor_id], map: "professor_id")
+}
+
+model turma_aluno {
+  id       Int   @id @default(autoincrement())
+  turma_id Int
+  aluno_id Int
+  turma    turma @relation(fields: [turma_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_aluno_ibfk_1")
+  aluno    aluno @relation(fields: [aluno_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_aluno_ibfk_2")
+
+  @@index([aluno_id], map: "aluno_id")
+  @@index([turma_id], map: "turma_id")
+}
