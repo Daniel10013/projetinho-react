@@ -7,14 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model aluno {
-  id          Int           @id @default(autoincrement())
-  nome        String        @db.VarChar(100)
-  email       String        @db.VarChar(100)
-  senha       String        @db.VarChar(100)
-  turma_aluno turma_aluno[]
-}
-
 model disciplina {
   id           Int       @id @default(autoincrement())
   nome         String    @db.VarChar(30)
@@ -45,23 +37,19 @@ model professor {
 }
 
 model turma {
-  id            Int           @id @default(autoincrement())
-  nome          String        @db.VarChar(30)
+  id            Int       @id @default(autoincrement())
+  nome          String    @db.VarChar(30)
   limite_alunos Int
   professor_id  Int
-  professor     professor     @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_ibfk_1")
-  turma_aluno   turma_aluno[]
+  professor     professor @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_ibfk_1")
 
   @@index([professor_id], map: "professor_id")
 }
 
-model turma_aluno {
-  id       Int   @id @default(autoincrement())
-  turma_id Int
-  aluno_id Int
-  turma    turma @relation(fields: [turma_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_aluno_ibfk_1")
-  aluno    aluno @relation(fields: [aluno_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_aluno_ibfk_2")
-
-  @@index([aluno_id], map: "aluno_id")
-  @@index([turma_id], map: "turma_id")
+model usuarios {
+  id      Int    @id @db.UnsignedInt
+  usuario String @db.VarChar(100)
+  cnpj    String @db.VarChar(20)
+  email   String @db.VarChar(100)
+  senha   String @db.VarChar(255)
 }
