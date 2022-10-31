@@ -1,4 +1,4 @@
-POST http://localhost:3000/api/users/login
+POST http://localhost:3000/api/v1/users/login
 Content-Type: application/json
 
 {
@@ -7,12 +7,12 @@ Content-Type: application/json
 }
 
 ### CREATE A USER 
-POST http://localhost:3000/api/users/create
+POST http://localhost:3000/api/v1/users/create
 Content-Type: application/json
 
 {
-    "nome": "Daniel",
-    "email": "danielMaster@gmail.com",
-    "senha": "senhaDaniel",
-    "data": "2022-09-26T21:05:20.714Z"
+    "usuario": "Daniel",
+    "email": "daniel@gmail.com",
+    "cnpj": "32.832.967/0001-26",
+    "senha": "senhaDaniel"
 }
