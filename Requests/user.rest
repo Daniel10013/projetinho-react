@@ -2,8 +2,8 @@ POST http://localhost:3000/api/v1/users/login
 Content-Type: application/json
 
 {
-    "email": "danielfilipe2@gmail.com",
-    "senha": "senhateste"
+    "email": "daniel@gmail.com",
+    "senha": "senhaDaniel"
 }
 
 ### CREATE A USER 

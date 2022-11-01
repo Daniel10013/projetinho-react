@@ -2,7 +2,6 @@ import { Request, Response } from "express"
 import { PrismaClient } from "@prisma/client"
 import * as bcrypt from 'bcrypt'
 import { prismaDisconect, prismaError } from "../Libs/Prisma/PrimsaUtil"
-import { UserToCreate } from "../Types/userToCreateInterface"
 
 const prisma = new PrismaClient()
 
@@ -16,10 +15,10 @@ class UserController{
         const users: any = await prisma.usuarios.count({
           where: {
             email: data.email,
-          },
+          }
         })
         if (users > 0) {
-          res.send('Já existe uma conta com esse email!')
+          res.json({status: true, msg: "Já existe uma conta com esse email!"});
           return
         }
         const userToCreate = await prisma.usuarios
@@ -32,7 +31,7 @@ class UserController{
             },
           })
           .then(() => {
-            res.status(201).send('Usuário criado com sucesso!')
+            res.status(201).json({status: true, msg: "Conta criada com sucesso!"});
           })
       }
       create()
