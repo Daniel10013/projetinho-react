@@ -12,6 +12,16 @@ function routeTeacher(app: express.Application){
             console.log(err)
         }
     })
+
+    app.post('/api/v1/teacher/login', async (req: Request, res: Response) => {
+        try{
+            await teacherController.teacherLogin(req, res)
+        }
+        catch (err){
+            console.log(err)
+        }
+    })
+
 }
 
 export default routeTeacher

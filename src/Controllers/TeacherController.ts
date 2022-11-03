@@ -44,6 +44,44 @@ class teacherController{
             console.log(err)
         }
     }
+
+    async teacherLogin(req: Request, res: Response) {
+        try {
+          const data = req.body
+          const login = async () => {
+            const userToLogin = await prisma.professor.findFirst({
+              where: {
+                OR: {
+                  email: { equals: data.email },
+                },
+              },
+              select: {
+                  senha: true,
+              }
+            })
+    
+            if (userToLogin == undefined) {
+              res.json({status: false, msg: "Usuário ou senha incorretos!"})
+              return
+            } 
+            
+            await bcrypt.compare(data.senha, userToLogin.senha) 
+              ? res.json({status: true, msg: "Login efetuado com sucesso!"}) 
+              : res.json({status: false, msg: "Usuário ou senha incorretos!"});
+    
+          }
+          login()
+            .then(() => {
+                prismaDisconect()
+            })
+            .catch((e) => {
+              prismaError(e)
+            })
+        } 
+        catch (err) {
+          res.send(err)
+        }
+      } 
 }
 
 export default teacherController

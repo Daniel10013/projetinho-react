@@ -29,9 +29,13 @@ class UserController{
               cnpj: data.cnpj,
               senha: await bcrypt.hash(req.body.senha, 15),
             },
+            select: {
+              id: true,
+              usuario: true
+            }
           })
           .then(() => {
-            res.status(201).json({status: true, msg: "Conta criada com sucesso!"});
+            res.status(201).json({status: true, msg: "Conta criada com sucesso!", user: userToCreate});
           })
       }
       create()
@@ -62,11 +66,13 @@ class UserController{
         })
 
         if (userToLogin == undefined) {
-          res.send(false)
+          res.json({status: false, msg: "Usuário ou senha incorretos!"})
           return
         } 
         
-        await bcrypt.compare(data.senha, userToLogin.senha) ? res.json('true') : res.send('false');
+        await bcrypt.compare(data.senha, userToLogin.senha) 
+          ? res.json({status: true, msg: "Login efetuado com sucesso!"}) 
+          : res.json({status: false, msg: "Usuário ou senha incorretos!"});
 
       }
       login()
