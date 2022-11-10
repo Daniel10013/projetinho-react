@@ -68,10 +68,10 @@ class UserController{
         if (userToLogin == undefined) {
           res.json({status: false, msg: "Usuário ou senha incorretos!"})
           return
-        } 
-        
-        await bcrypt.compare(data.senha, userToLogin.senha) 
-          ? res.json({status: true, msg: "Login efetuado com sucesso!"}) 
+        }
+
+        await bcrypt.compare(data.senha, userToLogin.senha)
+          ? res.json({status: true, msg: "Login efetuado com sucesso!"})
           : res.json({status: false, msg: "Usuário ou senha incorretos!"});
 
       }
@@ -82,11 +82,11 @@ class UserController{
         .catch((e) => {
           prismaError(e)
         })
-    } 
+    }
     catch (err) {
       res.send(err)
     }
-  }    
+  }
 }
 
 export default UserController

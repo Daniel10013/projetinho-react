@@ -24,8 +24,7 @@ class teacherController{
                     data: {
                         nome: data.nome,
                         email: data.email,
-                        senha: await bcrypt.hash(req.body.senha, 15),
-                        idade: data.idade
+                        senha: await bcrypt.hash(req.body.senha, 15)
                     } 
                 })
                 .then(()=> {

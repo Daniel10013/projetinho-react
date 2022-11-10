@@ -31,7 +31,7 @@ model professor {
   nome       String       @db.VarChar(100)
   email      String       @db.VarChar(100)
   senha      String       @db.VarChar(100)
-  idade      Int?
+  idade      Int
   disciplina disciplina[]
   horarios   horarios[]
   turma      turma[]
