@@ -81,6 +81,32 @@ class teacherController{
           res.send(err)
         }
       } 
+
+      async getAllProfessores(req: Request, res: Response){
+        try{
+          const getProfessores = async () => {
+            const professores = await prisma.professor.findMany({
+              select:{
+                nome: true
+              }
+            })
+
+            res.json(professores)
+          }
+
+          getProfessores()
+            .then(() => {
+                prismaDisconect()
+            })
+            .catch((e) => {
+              prismaError(e)
+            })
+
+        }
+        catch(err){
+          console.log(err)
+        }
+      }
 }
 
 export default teacherController

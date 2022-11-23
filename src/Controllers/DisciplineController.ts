@@ -32,6 +32,29 @@ class DisciplineController{
             console.log(err)
         }
     }
+
+    async getAllDisciplines(req: Request, res: Response){
+        try{
+            const data = async () => {
+                const data = await prisma.disciplina.findMany({
+                    select:{
+                        nome: true
+                    }
+                })
+                res.json(data);
+            }
+            data()
+                .then(async ()=> {
+                    await prismaDisconect();
+                })
+                .catch(async (e) => {
+                    await prismaError(e)
+                })
+        }
+        catch (err){
+            console.log(err)
+        }
+    }
 }
 
 export default DisciplineController

@@ -1,3 +1,4 @@
+
 POST http://localhost:3000/api/v1/teacher/create
 Content-Type: application/json
 
@@ -6,3 +7,7 @@ Content-Type: application/json
     "email": "daniel@gmail.com",
     "senha": "senhaDaniel"
 }
+
+
+###
+GET http://localhost:3000/api/v1/teacher/get-all

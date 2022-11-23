@@ -1,9 +1,12 @@
-POST http://localhost:3000/api/v1/classroom/create
+###
+POST http://localhost:3000/api/v1/discipline/create
 Content-Type: application/json
 
 {
     "nome": "Matematica",
-    "limite_alunos": 30,
     "professor_id": 1,
     "disciplina_id": 1
 }
+
+###
+GET http://localhost:3000/api/v1/discipline/get-all
