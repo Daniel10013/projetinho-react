@@ -23,7 +23,6 @@ model professor {
   email      String       @db.VarChar(100)
   senha      String       @db.VarChar(100)
   aulas      aulas[]
-  aulas_dia  aulas_dia[]
   disciplina disciplina[]
   turma      turma[]
 }
@@ -36,14 +35,13 @@ model turma {
   disciplina_id Int
   professor     professor   @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_ibfk_1")
   disciplina    disciplina  @relation(fields: [disciplina_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_ibfk_2")
-  aulas_dia     aulas_dia[]
 
   @@index([professor_id], map: "professor_id")
   @@index([disciplina_id], map: "disciplina_id")
 }
 
 model usuarios {
-  id      Int    @id @db.UnsignedInt
+  id      Int    @id @db.UnsignedInt @default(autoincrement())
   usuario String @db.VarChar(100)
   cnpj    String @db.VarChar(20)
   email   String @db.VarChar(100)
@@ -52,23 +50,11 @@ model usuarios {
 
 model aulas {
   id           Int       @id @default(autoincrement())
+  nome_aula String @db.VarChar(100)
   inicio_aulas DateTime  @db.Date
   fim_aulas    DateTime  @db.Date
   professor_id Int
   professor    professor @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "aulas_ibfk_1")
 
   @@index([professor_id], map: "professor_id")
-}
-
-model aulas_dia {
-  id            Int       @id @default(autoincrement())
-  dia_aula      DateTime  @db.Date
-  dia_da_semana String?   @db.VarChar(30)
-  turma_id      Int
-  professor_id  Int
-  turma         turma     @relation(fields: [turma_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "aulas_dia_ibfk_1")
-  professor     professor @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "aulas_dia_ibfk_2")
-
-  @@index([professor_id], map: "professor_id")
-  @@index([turma_id], map: "turma_id")
 }
