@@ -1,4 +1,5 @@
 import express from "express";;
+import cors from "cors"
 
 // Routes
 import routeUser from './Routes/UserRoute';
@@ -11,6 +12,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+app.use(cors())
 
 routeUser(app);
 routeTeacher(app);

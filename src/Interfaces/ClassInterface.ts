@@ -1,6 +1,6 @@
 export interface Class {
-    nome: string, 
-    data_inicio: Date,
-    data_fim: Date,
+    title: string, 
+    start: Date,
+    end: Date,
     id_professor: number
 }

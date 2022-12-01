@@ -12,9 +12,9 @@ class ClassController{
             const createClass: Function = async () =>{
                 const classToCreate = await prisma.aulas.create({
                     data: {
-                        nome_aula: data.nome,
-                        inicio_aulas: data.data_inicio,
-                        fim_aulas: data.data_fim,
+                        nome_aula: data.title,
+                        inicio_aulas: data.start,
+                        fim_aulas: data.end,
                         professor_id: data.id_professor
                     }
                 })
@@ -46,9 +46,9 @@ class ClassController{
 
                 const dataToReturn: Array<Class> = foundData.map((eachData) => {
                     return<Class>{
-                        nome:   eachData.nome_aula,
-                        data_inicio: eachData.inicio_aulas,
-                        data_fim: eachData.fim_aulas
+                        title:   eachData.nome_aula,
+                        start: eachData.inicio_aulas,
+                        end: eachData.fim_aulas
                     }
                 })
 

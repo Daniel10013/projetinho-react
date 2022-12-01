@@ -3,9 +3,9 @@ POST http://localhost:3000/api/v1/class/create
 Content-Type: application/json
 
 {
-    "nome": "Teste Aula 3",
-    "data_inicio": "2022-12-20T00:37:07.036Z",
-    "data_fim": "2022-12-21T00:37:07.036Z",
+    "title": "Teste Aula 5",
+    "start": "2022-07-20T00:37:07.036Z",
+    "end": "2022-12-21T00:37:07.036Z",
     "id_professor": 1
 }
 
