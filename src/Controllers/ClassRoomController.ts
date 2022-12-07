@@ -9,12 +9,13 @@ class ClassRoomController{
     async createClassRoom(req: Request, res: Response){
         try{
             const data = req.body;
+            console.log(data.limite_alunos)
             const create = async () => {
                 await prisma.turma.create({
                     data: {
                         nome: data.nome,
-                        limite_alunos: data.limite_alunos,
-                        professor_id: data.professor_id
+                        professor_id: data.professor_id,
+                        disciplina_id: data.disciplina_id
                     }
                 })
 

@@ -38,7 +38,8 @@ class DisciplineController{
             const data = async () => {
                 const data = await prisma.disciplina.findMany({
                     select:{
-                        nome: true
+                        nome: true,
+                        id: true
                     }
                 })
                 res.json(data);

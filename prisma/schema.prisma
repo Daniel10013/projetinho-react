@@ -30,7 +30,6 @@ model professor {
 model turma {
   id            Int         @id @default(autoincrement())
   nome          String      @db.VarChar(30)
-  limite_alunos Int
   professor_id  Int
   disciplina_id Int
   professor     professor   @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "turma_ibfk_1")

@@ -65,7 +65,7 @@ class teacherController{
             } 
             
             await bcrypt.compare(data.senha, userToLogin.senha) 
-              ? res.json({status: true, msg: "Login efetuado com sucesso!"}) 
+              ? res.json({status: true, msg: "Login efetuado com sucesso!", userToLogin}) 
               : res.json({status: false, msg: "Usuário ou senha incorretos!"});
     
           }
@@ -87,7 +87,8 @@ class teacherController{
           const getProfessores = async () => {
             const professores = await prisma.professor.findMany({
               select:{
-                nome: true
+                nome: true,
+                id: true
               }
             })
 
