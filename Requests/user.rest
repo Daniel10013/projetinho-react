@@ -2,7 +2,7 @@ POST http://localhost:3000/api/v1/users/login
 Content-Type: application/json
 
 {
-    "email": "daniel@gmail.com",
+    "email": "testeuser@gmail.com",
     "senha": "senhaDaniel"
 }
 
@@ -12,7 +12,6 @@ Content-Type: application/json
 
 {
     "usuario": "Daniel",
-    "email": "daniel@gmail.com",
-    "cnpj": "32.832.967/0001-26",
+    "email": "daniel6@gmail.com",
     "senha": "senhaDaniel"
 }

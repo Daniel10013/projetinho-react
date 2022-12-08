@@ -55,6 +55,7 @@ class teacherController{
                 },
               },
               select: {
+                  id: true,
                   senha: true,
               }
             })
@@ -65,7 +66,7 @@ class teacherController{
             } 
             
             await bcrypt.compare(data.senha, userToLogin.senha) 
-              ? res.json({status: true, msg: "Login efetuado com sucesso!", userToLogin}) 
+              ? res.json({status: true, msg: "Login efetuado com sucesso!", id: userToLogin.id, type: "professor"}) 
               : res.json({status: false, msg: "Usuário ou senha incorretos!"});
     
           }

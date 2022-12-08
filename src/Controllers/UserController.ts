@@ -18,25 +18,21 @@ class UserController{
           }
         })
         if (users > 0) {
-          res.json({status: true, msg: "Já existe uma conta com esse email!"});
+          res.json({status: false, msg: "Já existe uma conta com esse email!"});
           return
         }
-        const userToCreate = await prisma.usuarios
-          .create({
+        const userToCreate = await prisma.usuarios.create({
             data: {
               email: data.email,
               usuario: data.usuario,
-              cnpj: data.cnpj,
               senha: await bcrypt.hash(req.body.senha, 15),
             },
             select: {
-              id: true,
-              usuario: true
+              id: true
             }
           })
-          .then(() => {
-            res.status(201).json({status: true, msg: "Conta criada com sucesso!", user: userToCreate});
-          })
+          
+          res.status(201).json({status: true, msg: "Conta criada com sucesso!", userToCreate});
       }
       create()
         .then(() => {
@@ -61,6 +57,7 @@ class UserController{
             },
           },
           select: {
+              id: true,
               senha: true,
           }
         })
@@ -71,7 +68,7 @@ class UserController{
         }
 
         await bcrypt.compare(data.senha, userToLogin.senha)
-          ? res.json({status: true, msg: "Login efetuado com sucesso!"})
+          ? res.json({status: true, msg: "Login efetuado com sucesso!", id: userToLogin.id, type: "user"})
           : res.json({status: false, msg: "Usuário ou senha incorretos!"});
 
       }
